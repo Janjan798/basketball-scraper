@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 
 
@@ -38,7 +37,7 @@ def clean_player_table(player_name):
             print(f"Player:{player_name} Error: Column {col} not available")
     df["MP"] = df["MP"].apply(mp_to_float)
 
-    # Date to datetime
+    # date to datetime
     df["Date"] = pd.to_datetime(df["Date"]).dt.date
     df.to_excel(f"player_stats/{player_name}.xlsx", index=False)
 
