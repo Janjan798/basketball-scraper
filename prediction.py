@@ -38,13 +38,16 @@ TEAM_ABBREV_TO_NAME = {
 
 
 def load_team_stats(path):
-    """Load team advanced stats with ORtg, DRtg, eFG%_DEF, etc."""
+    """to load team advanced stats with ORtg, DRtg, eFG%_DEF, etc.  """
     team_df = pd.read_excel(path)
     team_df = team_df.set_index("Team")
     return team_df
 
 def add_features(player_df, team_df):
-    """Add opponent and rolling features for model training."""
+    """
+    to add opponent and player rolling features for model training.
+    """
+
     df = player_df.copy()
 
     df["Opp_TeamName"] = df["Opp"].map(TEAM_ABBREV_TO_NAME)
