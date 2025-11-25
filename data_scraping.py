@@ -24,14 +24,14 @@ def get_player_id(name_list:list):
   list_ids=eval(response.output_text)
   return list_ids
 
-def get_all_games_player_data(name_list:list):
+def get_all_games_player_data(name_list:list,season=2026):
     """
     Gets the data for each game played by a player(list:input) in this season and saves it as an excel file
     """
     for name in name_list:
         list_player_ids = get_player_id(name)
         for player_id in list_player_ids:
-          df_list=pd.read_html(f"https://www.basketball-reference.com/players/{player_id[0]}/{player_id}/gamelog/2026")
+          df_list=pd.read_html(f"https://www.basketball-reference.com/players/{player_id[0]}/{player_id}/gamelog/{season}")
           df=df_list[7]#7 because the first 6 are some nonsense tables
           df.to_excel(f"player_stats/{name}.xlsx", index=False)
 
@@ -56,8 +56,9 @@ def get_team_stats_data():
     cols[23] = "FT/FGA_DEF"
     df.columns = cols
 
-    df.to_excel("team_stats.xlsx")
+    df.to_excel("team_stats.xlsx",index=False)
 
 #get_all_games_player_data(["James Harden","Ivica Zubac","Stephen Curry"])
+#get_all_games_player_data(["James Harden"],2025)
 #get_all_player_pergame_avg()
 #get_team_stats_data()

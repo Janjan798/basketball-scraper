@@ -21,6 +21,7 @@ def clean_player_table(player_name):
 
     df["HomeAway"] = df["Unnamed: 5"].apply(lambda x: "Away" if x == "@" else "Home")
     df = df.drop(columns=["Unnamed: 5"]) # to classify game as home or away and drop '@' column
+    df["Home"] = (df["HomeAway"] == "Home").astype(int)
 
     df = df.iloc[:-1].copy() # to drop last row (season total)
 
@@ -41,10 +42,10 @@ def clean_player_table(player_name):
     df["Date"] = pd.to_datetime(df["Date"]).dt.date
     df.to_excel(f"player_stats/{player_name}.xlsx", index=False)
 
-"""
-clean_player_table("Ivica Zubac")
+
+"""clean_player_table("Ivica Zubac")
 clean_player_table("Stephen Curry")
-clean_player_table("James Harden")
-"""
+clean_player_table("James Harden")"""
+
 
 
