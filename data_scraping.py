@@ -35,5 +35,29 @@ def get_all_games_player_data(name_list:list):
           df=df_list[7]#7 because the first 6 are some nonsense tables
           df.to_excel(f"player_stats/{name}.xlsx", index=False)
 
+def get_team_stats_data():
+    """
+    Gets the average per game data for each team and saves it
+    """
+    df = pd.read_html("https://www.basketball-reference.com/leagues/NBA_2026.html#advanced-team",header=[0,1], index_col=0)
+    df=df[10]
+    df.columns = df.columns.droplevel(0)
+    df=df.drop(columns=["Unnamed: 17_level_1", "Unnamed: 22_level_1", "Unnamed: 27_level_1", "Arena", "Attend.", "Attend./G"])
+    df=df.iloc[:-1].copy()
+
+    cols = df.columns.tolist()
+    cols[16] = "eFG%_OFF"
+    cols[17] = "TOV%_OFF"
+    cols[18] = "ORB%_OFF"
+    cols[19] = "FT/FGA_OFF"
+    cols[20] = "eFG%_DEF"
+    cols[21] = "TOV%_DEF"
+    cols[22] = "DRB%_DEF"
+    cols[23] = "FT/FGA_DEF"
+    df.columns = cols
+
+    df.to_excel("team_stats.xlsx")
+
 #get_all_games_player_data(["James Harden","Ivica Zubac","Stephen Curry"])
 #get_all_player_pergame_avg()
+#get_team_stats_data()
