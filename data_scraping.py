@@ -9,7 +9,8 @@ def get_all_player_pergame_avg():
   """
   df_list = pd.read_html("https://www.basketball-reference.com/leagues/NBA_2026_per_game.html")
   df = df_list[0]
-  print(df.head())
+  df=df.iloc[:-1].copy()
+  df=df.drop(columns=["Awards"])
   df.to_excel("nba_2026_all_players_average_per_game.xlsx", index=False)
 
 def get_player_id(name_list:list):
