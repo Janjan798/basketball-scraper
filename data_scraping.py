@@ -58,7 +58,19 @@ def get_team_stats_data():
 
     df.to_excel("team_stats.xlsx",index=False)
 
-#get_all_games_player_data(["James Harden","Ivica Zubac","Stephen Curry"])
+"""
+get_all_games_player_data([
+    "Devin Vassell",
+    "P.J. Washington",
+    "Grayson Allen",
+    "Domantas Sabonis",
+    "Shaedon Sharpe",
+    "Zach LaVine",
+    "Coby White",
+    "Nikola Vucevic",
+    "Andrew Wiggins"
+])
+"""
 #get_all_games_player_data(["James Harden"],2025)
-#get_all_player_pergame_avg()
+get_all_player_pergame_avg()
 #get_team_stats_data()
